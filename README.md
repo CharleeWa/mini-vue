@@ -3,8 +3,8 @@
 实现最简 vue3 模型，用于深入学习 vue3
 
 - ✔ setup 项目&集成jest&集成ts
-- [ ] 实现 effect & reactive & 依赖收集 & 触发依赖
-- [ ] 实现 effect 返回 runner
+- ✔ 实现 effect & reactive & 依赖收集 & 触发依赖
+- ✔ 实现 effect 返回 runner
 - [ ] 实现 effect 的 scheduler 功能
 - [ ] 实现stop 功能
 - [ ] 实现 readonly 功能
