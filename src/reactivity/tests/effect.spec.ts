@@ -1,4 +1,4 @@
-import { effect } from "../effect";
+import { effect, stop } from "../effect";
 import { reactive } from "../reactive";
 
 describe('effect', () => {
@@ -32,7 +32,7 @@ describe('effect', () => {
     expect(r).toBe('foo');
   })
 
-  test('scheduler', () => { 
+  test('scheduler', () => {
     let dummy;
     let run: any;
     const scheduler = jest.fn(() => {
@@ -55,5 +55,38 @@ describe('effect', () => {
     run();
     // should have run
     expect(dummy).toBe(2);
+  })
+
+  test('stop', () => { 
+    let dummy;
+    const obj = reactive({ prop: 1 })
+    const runner = effect(() => {
+      dummy = obj.prop
+    })
+    obj.prop = 2;
+    expect(dummy).toBe(2);
+    stop(runner);
+    obj.prop = 3;
+    expect(dummy).toBe(2);
+
+    // stopped effect should still be manually callable
+    runner();
+    expect(dummy).toBe(3);
+  })
+
+  test('onStop', () => { 
+    const obj = reactive({
+      foo: 1
+    });
+    const onStop = jest.fn();
+    let dummy;
+    const runner = effect(() => { 
+      dummy = obj.foo
+    }, {
+      onStop
+    })
+
+    stop(runner);
+    expect(onStop).toBeCalledTimes(1);
   })
 })
