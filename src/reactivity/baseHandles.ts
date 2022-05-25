@@ -1,4 +1,5 @@
 import { track, trigger } from "./effect";
+import { ReactiveFlags } from "./reactive";
 
 const get = createGetter()
 const set = createSetter()
@@ -6,8 +7,13 @@ const readonlyGet = createGetter(true)
 
 function createGetter(readonly = false) {
   return function get(target, key) {
-    //https://www.zhangxinxu.com/wordpress/2021/07/js-proxy-reflect/
     const res = Reflect.get(target, key);
+
+    if (key === ReactiveFlags.IS_REACTIVE) {
+      return !readonly
+    } else if (key === ReactiveFlags.IS_READONLY) {
+      return readonly
+    }
 
     if (!readonly) { 
       // TODO 依赖收集
