@@ -12,7 +12,7 @@ describe('readonly', () => {
     expect(wrapped.foo).toBe(1)
   })
 
-  test('warn then call set', () => {
+  test('should call console.warm warn set', () => {
 
     console.warn = jest.fn()
 
@@ -22,6 +22,6 @@ describe('readonly', () => {
 
     user.age = 11
 
-    expect(console.warn).toBeCalled()
+    expect(console.warn).toHaveBeenCalled()
   })
 })
