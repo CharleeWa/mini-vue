@@ -1,6 +1,6 @@
 # mini-vue
 
-实现最简 vue3 模型，用于深入学习 vue3
+实现最简 vue3 模型，用于深入学习 vue3。 base on [mini-vue](https://github.com/cuixiaorui/mini-vue)
 
 - ✔ setup 项目&集成jest&集成ts
 - ✔ 实现 effect & reactive & 依赖收集 & 触发依赖
