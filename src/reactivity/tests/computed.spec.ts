@@ -13,4 +13,26 @@ describe("computed", () => {
 
     expect(age.value).toBe(1);
   })
+
+  test("should compute lazily", () => {
+    const value = reactive({
+      foo: 1
+    });
+
+    const getter = jest.fn(() => {
+      return value.foo
+    });
+
+    const cValue = computed(getter)
+
+    // lasy
+    expect(getter).not.toHaveBeenCalled();
+
+    expect(cValue.value).toBe(1);
+    expect(getter).toHaveBeenCalledTimes(1);
+
+    // should not compute again
+    cValue.value;
+    expect(getter).toHaveBeenCalledTimes(1);
+  })
 })
