@@ -20,7 +20,7 @@
 - ✔ 实现初始化 component 主流程
 - ✔ 使用 rollup 打包库
 - ✔ 实现初始化 element 主流程
-- [ ] 实现组件代理对象(包含 this. api 的实现原理)
+- ✔ 实现组件代理对象(包含 this. api 的实现原理)
 - [ ] 实现 shapeFlags
 - [ ] 实现注册事件功能
 - [ ] 实现组件 props 功能

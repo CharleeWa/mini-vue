@@ -1,5 +1,6 @@
 import { isObject } from "../shared/index"
 import { createComponentInstance, setupComponent } from "./component"
+import { createVNode } from "./vnode"
 
 export function render(vnode, container) {
   // patch
@@ -18,17 +19,19 @@ function processComponent(vnode:any, container: any) {
   mountComponent(vnode, container)
 }
 
-function mountComponent(vnode: any, container: any) {
-  const instance = createComponentInstance(vnode)
+function mountComponent(initialVNode: any, container: any) {
+  const instance = createComponentInstance(initialVNode)
   setupComponent(instance)
-  setupRenderEffect(instance, container)
+  setupRenderEffect(instance, initialVNode, container)
 }
 
-function setupRenderEffect(instance: any, container: any) {
+function setupRenderEffect(instance: any, initialVNode, container: any) {
   const { proxy } = instance
   const subTree = instance.render.call(proxy)
 
   patch(subTree, container)
+
+  initialVNode.el = subTree.el
 }
 
 function processElement(vnode: any, container: any) {
@@ -36,7 +39,7 @@ function processElement(vnode: any, container: any) {
 }
 
 function mountElement(vnode: any, container: any) {
-  const el = document.createElement(vnode.type)
+  const el = ( vnode.el = document.createElement(vnode.type))
 
   // string array
   const { children } = vnode
