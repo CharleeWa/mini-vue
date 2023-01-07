@@ -7,7 +7,10 @@ export const App = {
     // ui
     return h('div', {
       id: 'root',
-      class: ['red', 'hard']
+      class: ['red', 'hard'],
+      onClick() {
+        console.log('click')
+      }
     },
     'hi, '+ this.msg
     // string
