@@ -25,7 +25,7 @@
 - ✔ 实现注册事件功能
 - ✔ 实现组件 props 功能
 - ✔ 实现组件 emit 功能
-- [ ] 实现组件 slots 功能
+- ✔ 实现组件 slots 功能
 - [ ] 实现 Fragment 和 Text 类型节点
 - [ ] 实现 getCurrentInstance
 - [ ] 实现 provide/inject 功能
