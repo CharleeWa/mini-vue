@@ -29,7 +29,7 @@
 - ✔ 实现 Fragment 和 Text 类型节点
 - ✔ 实现 getCurrentInstance
 - ✔ 实现 provide/inject 功能
-- [ ] 实现自定义渲染器 custom renderer
+- ✔ 实现自定义渲染器 custom renderer
 - [ ] 更新element流程搭建
 - [ ] 更新element 的 props
 - [ ] 更新 element 的 children (1)
