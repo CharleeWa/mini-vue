@@ -4,13 +4,17 @@ function createElement(type) {
   return document.createElement(type)
 }
 
-function patchProp(el, key, val) {
+function patchProp(el, key, prevVal, nextval) {
   const isOn = (key: string) => /^on[A-Z]/.test(key)
   if(isOn(key)) {
     const event = key.slice(2).toLowerCase()
-    el.addEventListener(event, val)
+    el.addEventListener(event, nextval)
   } else {
-    el.setAttribute(key, val)
+    if(nextval === undefined || nextval === null) {
+      el.removeAttribute(key)
+    } else {
+      el.setAttribute(key, nextval)
+    }
   }
 }
 

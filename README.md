@@ -31,7 +31,7 @@
 - ✔ 实现 provide/inject 功能
 - ✔ 实现自定义渲染器 custom renderer
 - ✔ 更新element流程搭建
-- [ ] 更新element 的 props
+- ✔ 更新element 的 props
 - [ ] 更新 element 的 children (1)
 - [ ] 更新 element 的 children - 双端对比diff 算法 （1）
 - [ ] 更新 element 的 children - 双端对比diff 算法 （2）
