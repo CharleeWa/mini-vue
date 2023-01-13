@@ -34,7 +34,7 @@
 - ✔ 更新element 的 props
 - ✔ 更新 element 的 children (1)
 - ✔ 更新 element 的 children - 双端对比diff 算法 （1）
-- [ ] 更新 element 的 children - 双端对比diff 算法 （2）
+- ✔ 更新 element 的 children - 双端对比diff 算法 （2）
 - [ ] 更新 element 的 children - 双端对比diff 算法 （3）
 - [ ] 学习尤大解决 bug 的处理方式
 - [ ] 实现组件更新功能
