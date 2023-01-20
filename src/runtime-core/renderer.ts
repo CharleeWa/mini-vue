@@ -185,9 +185,12 @@ export function createRenderer(options) {
       let s2 = i
 
       let patched = 0
+      let moved = false
+      let maxNewIndexSoFar = 0
       const toBePatched = e2 - s2 + 1
       const keyToNewIndexMap = new Map()
       const newIndexToOldIndexMap = new Array(toBePatched)
+
       for (let i = 0; i < toBePatched; i++) newIndexToOldIndexMap[i] = 0
 
       for (let i = s2; i <= e2; i++) {
@@ -218,15 +221,37 @@ export function createRenderer(options) {
         if(newIndex === undefined) {
           hostRemove(prevChild.el)
         } else {
+
+          if(newIndex >= maxNewIndexSoFar) {
+            maxNewIndexSoFar = newIndex
+          } else {
+            moved = true
+          }
+
           newIndexToOldIndexMap[newIndex - s2] = i + 1
           patch(prevChild, c2[newIndex], container, parentComponent, null)
           patched++
         }
       }
 
-      const increasingNewIndexSequence = getSequence(newIndexToOldIndexMap)
+      const increasingNewIndexSequence = moved ? getSequence(newIndexToOldIndexMap): []
+      let j = increasingNewIndexSequence.length - 1
 
-      for (let i = 0; i < toBePatched; i++) {}
+      for (let i = toBePatched - 1; i >= 0; i--) {
+        const nextIndex = i + s2
+        const nextChild = c2[nextIndex]
+        const anchor = nextIndex + 1 < l2 ? c2[nextIndex + 1].el : null
+
+        if(newIndexToOldIndexMap[i] === 0) {
+          patch(null, nextChild, container, parentComponent, anchor)
+        } else if (moved) {
+          if(j < 0 || i !== increasingNewIndexSequence[j]) {
+            hostInsert(nextChild.el, container, anchor)
+          } else {
+            j--
+          }
+        }
+      }
     }
   }
 
