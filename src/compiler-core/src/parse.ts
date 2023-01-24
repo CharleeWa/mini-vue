@@ -7,12 +7,26 @@ export function baseParse(content: string) {
 
 function parseChildren(context) {
   const nodes: any = []
+
   let node
-  if(context.source.startsWith('{{')) {
+  const s = context.source
+  if(s.startsWith('{{')) {
     node = parseInterpolation(context)
+  } else if (s[0] === '<') {
+    if(/[a-z]/i.test(s[1])) {
+      node = parseElement(context)
+    }
   }
+
   nodes.push(node)
   return nodes
+}
+
+function parseElement(context: any) {
+  return {
+    type: NodeTypes.ELEMENT,
+    tag: 'div'
+  }
 }
 
 function parseInterpolation(context) {
@@ -53,4 +67,5 @@ function createRoot(children) {
 function createParserContext(content: string): any {
   return { source: content }
 }
+
 
