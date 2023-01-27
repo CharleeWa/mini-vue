@@ -34,7 +34,6 @@ function parseChildren(context, ancestors) {
 }
 
 function isEnd(context, ancestors) {
-  //2. 当遇到结束标签的时候
   const s = context.source
   if(s.startsWith('</')) {
     for (let i = ancestors.length - 1; i >= 0; i--) {
@@ -44,12 +43,6 @@ function isEnd(context, ancestors) {
       }
     }
   }
-
-  // if(parentTag && s.startsWith(`</${parentTag}>`)) {
-  //   return true
-  // }
-
-  //1. source 有值的时候
   return !s
 }
 
@@ -68,7 +61,7 @@ function parseText(context: any) {
 
   return {
     type: NodeTypes.TEXT,
-    tag: content
+    content
   }
 }
 
@@ -94,7 +87,10 @@ function parseElement(context: any, ancestors) {
 }
 
 function startsWithEndTagOpen(source, tag) {
-  return source.startsWith('</') && source.slice(2, 2 + tag.length).toLowerCase() === tag.toLowerCase()
+  return (
+    source.startsWith('</') &&
+    source.slice(2, 2 + tag.length).toLowerCase() === tag.toLowerCase()
+  )
 }
 
 function parseTag(context:any, type: TagType) {
