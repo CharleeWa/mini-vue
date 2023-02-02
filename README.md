@@ -47,5 +47,5 @@
 - ✔ 实现代码生成 string 类型
 - ✔ 实现代码生成插值类型
 - ✔ 实现代码生成三种联合类型
-- [ ] 实现编译 template 成 render 函数
+- ✔ 实现编译 template 成 render 函数
 
